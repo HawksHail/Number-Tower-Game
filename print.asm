@@ -22,7 +22,7 @@ space: .asciiz "        "
 
 .text
 la $a0, nums	#load address of array into arg0 for testing
-li $ra, 0x00400140	#drop off bottom for testing
+la $ra, bottom	#drop off bottom for testing
 
 printPyr: 
 	move $t0, $a0 	#move array address to $t0
@@ -102,3 +102,4 @@ great:	li $v0, 1	#syscall print int
 	j printNum
 
 Exit:	jr $ra
+bottom:
