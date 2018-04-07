@@ -1,13 +1,13 @@
-#Zion Mantey
-#3/18/18
+# Zion Mantey
+# Created 3/18/18
 
-# import with -> .include "print.asm"
 # Address of array goes in $a0
 # Call printPyr to use (jal printPyr)
+# To test, uncomment all #test comments
 
 .data	
 .align 2 #align on word boundries
-nums: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28	#test array
+#test nums: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28	#test array
 row7: .asciiz  "\n                                    "
 row6: .asciiz  "\n                              "
 row5: .asciiz  "\n                        "
@@ -21,8 +21,8 @@ space: .asciiz "        "
 
 
 .text
-la $a0, nums	#load address of array into arg0 for testing
-la $ra, bottom	#drop off bottom for testing
+#test la $a0, nums	#load address of array into arg0 for testing
+#test la $ra, bottom	#drop off bottom for testing
 
 printPyr: 
 	move $t0, $a0 	#move array address to $t0
@@ -102,4 +102,4 @@ great:	li $v0, 1	#syscall print int
 	j printNum
 
 Exit:	jr $ra
-bottom:
+#test bottom:
