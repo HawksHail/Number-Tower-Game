@@ -6,14 +6,11 @@
 
 
 .data
-
 filename: .ascii  "Project\\Number-Tower-Game\\pyramids"	# path relative to MARS jar file
 partFilename: .asciiz "\\pyramid?.dat"				# individual file to be read. Is randomized per run
 .align 2							# align on word boundary
 array: .space 112	# space for 28 words
 file: .space 512	# input buffer
-
-
 
 
 .text
@@ -67,8 +64,8 @@ bne $t7, 28, loop	# loop until all 28 numbers are read
 
 lw $v0, ($sp) 		# load return address
 addiu $sp, $sp, 4	# restore $sp
-#la $v0, array		# load array address into $v0		#COMMENT THESE 2 LINES TO TEST
-#jr $ra			# return to caller
+la $v0, array		# load array address into $v0		#COMMENT THESE 2 LINES TO TEST
+jr $ra			# return to caller
 
-li $v0, 10 		# exit					#UNCOMMENT THESE 2 LINES TO TEST
-syscall
+#li $v0, 10 		# exit					#UNCOMMENT THESE 2 LINES TO TEST
+#syscall
