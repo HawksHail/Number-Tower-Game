@@ -2,6 +2,7 @@
 # Created 4/7/18
 
 # Loads a random pyramid and returns the address in $v0
+# The pyramid is loaded top to bottom, with index 0 being the top and 27 being the right bottom
 # No input
 
 
@@ -62,7 +63,7 @@ sw $v0, 0($t8)
 addi $t7, $t7, 1	# increment loop counter
 bne $t7, 28, loop	# loop until all 28 numbers are read
 
-lw $v0, ($sp) 		# load return address
+lw $ra, ($sp) 		# load return address
 addiu $sp, $sp, 4	# restore $sp
 la $v0, array		# load array address into $v0		#COMMENT THESE 2 LINES TO TEST
 jr $ra			# return to caller

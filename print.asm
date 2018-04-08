@@ -7,7 +7,7 @@
 
 .data	
 .align 2 #align on word boundries
-#test nums: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28	#test array
+#nums: .word 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28	#test array
 row7: .asciiz  "\n                                    "
 row6: .asciiz  "\n                              "
 row5: .asciiz  "\n                        "
@@ -21,12 +21,11 @@ space: .asciiz "        "
 
 
 .text
-#test la $a0, nums	#load address of array into arg0 for testing
-#test la $ra, bottom	#drop off bottom for testing
+#la $a0, nums	#load address of array into arg0 for testing
 
 printPyr: 
 	move $t0, $a0 	#move array address to $t0
-	li $t9, 27	#index of array
+	li $t9, 0	#index of array
 
 print7:	li $v0, 4	#syscall print row 7 string
 	la $a0, row7
@@ -65,12 +64,12 @@ print1:	li $v0, 4	#syscall print row 6 string
 	
 	
 printNum:
-	beq $t9, 26, print6
-	beq $t9, 24, print5
-	beq $t9, 21, print4
-	beq $t9, 17, print3
-	beq $t9, 12, print2
-	beq $t9, 6, print1
+	beq $t9, 1, print6
+	beq $t9, 3, print5
+	beq $t9, 6, print4
+	beq $t9, 10, print3
+	beq $t9, 15, print2
+	beq $t9, 21, print1
 cont:	li $v0, 4	#syscall print string
 	la $a0, space	#print spacing
 	syscall
@@ -96,10 +95,15 @@ great:	li $v0, 1	#syscall print int
 	move $a0, $t7	#move int to $a0
 	syscall
 	
-	addi $t9, $t9, -1	#decrement index
+	addi $t9, $t9, 1	#decrement index
 	
-	beq $t9, -1, Exit	#if index is -1 exit
+	beq $t9, 28, Exit	#if index is -1 exit
 	j printNum
+	
 
-Exit:	jr $ra
-#test bottom:
+Exit:	
+	#test li $v0, 10 		# exit		#UNCOMMENT THESE 2 LINES TO TEST
+	#test syscall
+
+	jr $ra
+
