@@ -18,8 +18,6 @@ int main()
       test1.generateTower(testTower);
       if(testTower[1][0] != 0)
          file<<testTower[1][0];
-      else
-         file<<"\n";
       for(int j = 1; j < 28; j++)
       {
          if(testTower[1][j] != 0)
