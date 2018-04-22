@@ -10,8 +10,8 @@
 filename: .ascii  "Project\\Number-Tower-Game\\pyramids"	# path relative to MARS jar file
 partFilename: .asciiz "\\pyramid?.dat"				# individual file to be read. Is randomized per run
 .align 2							# align on word boundary
-array: .space 112	# space for 28 words
-file: .space 512	# input buffer
+array: .space 224	# space for 28 words
+file: .space 1024	# input buffer
 .globl load
 
 .text
@@ -37,7 +37,7 @@ move $t9, $v0		# move file descriptor
 li $v0, 14		# read from file
 move $a0, $t9		# file descriptor to read from
 la $a1, file		# input buffer
-li $a2, 1024		# max number of characters to read
+li $a2, 256		# max number of characters to read
 syscall
 
 li $v0, 16		# close file
@@ -62,7 +62,7 @@ add $t8, $t8, $t0	# load array offest
 sw $v0, 0($t8)
 
 addi $t7, $t7, 1	# increment loop counter
-bne $t7, 28, loop	# loop until all 28 numbers are read
+bne $t7, 56, loop	# loop until all 28 numbers are read
 
 lw $ra, 4($sp) 		# load return address
 addiu $sp, $sp, 4	# restore $sp
