@@ -19,7 +19,6 @@ load:
 addiu $sp, $sp, -4	# store 1 word on stack
 sw $ra, 4($sp)      	# save $ra in the upper one
 
-# li $a0, 2		# set seed for testing
 li $v0, 42		# random int with bounds
 li $a1, 10		# maximum bound (not inclusive) i.e. [0,int)
 syscall
