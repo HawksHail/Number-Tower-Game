@@ -4,7 +4,7 @@
 .data
 array: .space 112 	# pyramid array
 invalidStr: .asciiz "\nThe input was invalid. "
-verifyStr: .asciiz "\nThe input could not be checked. Do you still want to enter it? (y or n) "
+filledStr: .asciiz "\nThe spot is already filled. "
 notConfirmed: .asciiz "\nThe input was not entered. "
 .globl main
 .text
@@ -27,10 +27,8 @@ move $a1, $v0
 move $a2, $v1
 jal verifyInput	# check input
 
-beq $v0, 1, invalid		# if input is invalid print error
+beq $v0, 1, alreadyfilled	# if input is invalid print error
 beq $v0, 2, invalid		# if input is invalid print error
-
-beq $v0, 3, verify		# if input is uncheckable, confirm print error
 
 cont:
 sll $t5, $a1, 2			# update pyramid to include 
@@ -41,26 +39,17 @@ j checkDone
 
 
 invalid: 
-li $v0, 4		# print string, prompt
+li $v0, 4		# print string, invalid
 la $a0, invalidStr
-syscall
-
-verify:
-li $v0, 4		# print string, prompt
-la $a0, verifyStr
-syscall
-
-li $v0, 12		# read char, label
-syscall
-
-beq $v0, 121, confirmed		# if y				
-li $v0, 4		# print string, prompt
-la $a0, notConfirmed
 syscall
 j start
 
-confirmed:
-j cont		#continue
+
+alreadyfilled: 
+li $v0, 4		# print string, filled
+la $a0, filledStr
+syscall
+j start
 
 
 checkDone:
