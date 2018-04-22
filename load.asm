@@ -7,7 +7,7 @@
 
 
 .data
-filename: .ascii  "Project\\Number-Tower-Game\\pyramids"	# path relative to MARS jar file
+filename: .ascii  "pyramids"	# path relative to MARS jar file
 partFilename: .asciiz "\\pyramid?.dat"				# individual file to be read. Is randomized per run
 .align 2							# align on word boundary
 array: .space 224	# space for 28 words
