@@ -139,7 +139,7 @@ beq $t9, 0, start
 
 # Done
 jal printPyr	# print pyr
-jal midi
+jal midiWin
 
 li $v0, 10 		# exit
 syscall

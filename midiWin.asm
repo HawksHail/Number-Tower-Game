@@ -1,10 +1,10 @@
 #Bradley Krakar
 #Created 4/22/2018
 
-.globl midi
+.globl midiWin
 
 .text
-midi:
+midiWin:
 li $v0, 33 #syscall midi out with pitch 69, duration 200 miliseconds, piano, and volume 100
 li $a0, 69
 li $a1, 200
