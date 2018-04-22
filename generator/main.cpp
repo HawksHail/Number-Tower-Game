@@ -25,7 +25,7 @@ int main()
          if(testTower[1][j] != 0)
             file<<"\n"<<testTower[1][j];
          else
-            file<<"\n"<<"\n";
+            file<<"\n";
       }
       file.close();   test1.generateTower(testTower);
    }
