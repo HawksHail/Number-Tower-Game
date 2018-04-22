@@ -27,6 +27,10 @@ int main()
          else
             file<<"\n";
       }
+      for(int j = 0; j < 28; j++)
+      {
+         file<<"\n"<<testTower[0][j];
+      }
       file.close();   test1.generateTower(testTower);
    }
 }
