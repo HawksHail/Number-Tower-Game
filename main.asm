@@ -26,11 +26,16 @@ jal verifyInput
 
 bne $v0, 0, invalid
 sll $t9, $a1, 2
-add $t9, $t9, $a1
-lw $a2, 0($t9)
+add $t9, $t9, $a0
+sw $a2, 0($t9)
 
 move $a0, $s0
 jal printPyr
+
+
+li $v0, 10 		# exit
+syscall
+
 
 
 invalid: 
@@ -39,5 +44,3 @@ la $a0, invalidStr
 syscall
 
 
-li $v0, 10 		# exit
-syscall

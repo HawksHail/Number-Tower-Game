@@ -93,7 +93,7 @@ parentLoopRight:
 beq $t1, $t9, oneParentRight	# check if index is equal to edge index
 add $t9, $t9, $t8	# increment index
 addi $t8, $t8, 1	# increment counter
-blt $t8, 6, parentLoopRight
+blt $t8, 8, parentLoopRight
 
 li $t9, 1	# index		Check if the index is on the left edge; it only has one parent to check
 li $t8, 2	# counter
@@ -101,13 +101,18 @@ parentLoopLeft:
 beq $t1, $t9, oneParentLeft
 add $t9, $t9, $t8	# increment index
 addi $t8, $t8, 1	# increment counter
-blt $t8, 6, parentLoopLeft
+blt $t8, 7, parentLoopLeft
 
 			#else it has 2 parents
 
 lw $t8, 0($t7)		# load parent 1
 beq $t8, 0, skipParent1	# if parent 1 is 0 skip
-lw $t9, 0($t0)		# load parent 1 other child
+
+add $t9, $t1, -1
+sll $t9, $t9, 2
+add $t9, $t0, $t9
+
+lw $t9, 0($t9)		# load parent 1 other child
 beq $t9, 0, skipParent1	# if parent 1 other child is 0 skip
 add $t6, $t2, $t9	# new + parent 1 other child
 bne $t6, $t8 invalidParent	# children do not add to parent
@@ -115,7 +120,12 @@ bne $t6, $t8 invalidParent	# children do not add to parent
 parent2:
 lw $t8, 4($t7)			# load parent 2
 beq $t8, 0, skipOnlyParent	# if parent 2 is 0 skip
-lw $t9, 0($t0)			# load parent 2 other child
+
+add $t9, $t1, 1
+sll $t9, $t9, 2
+add $t9, $t0, $t9
+
+lw $t9, 0($t9)			# load parent 2 other child
 beq $t9, 0, skipOnlyParent	# if parent 2 other child is 0 skip
 add $t6, $t2, $t9		# new + parent 2 other child
 bne $t6, $t8 invalidParent	# children do not add to parent
@@ -128,7 +138,12 @@ j valid
 oneParentRight:
 lw $t8, 0($t7)			# load parent
 beq $t8, 0, skipOnlyParent	# if parent is 0 skip
-lw $t9, 0($t0)			# load parent other child
+
+add $t9, $t1, 1
+sll $t9, $t9, 2
+add $t9, $t0, $t9
+
+lw $t9, 0($t9)			# load parent other child
 beq $t9, 0, skipOnlyParent	# if parent other child is 0 skip
 add $t6, $t2, $t9		# new + parent other child
 bne $t6, $t8 invalidParent	# children do not add to parent
@@ -137,7 +152,12 @@ j done
 oneParentLeft:
 lw $t8, 4($t7)			# load parent
 beq $t8, 0, skipOnlyParent	# if parent is 0 skip
-lw $t9, 0($t0)			# load parent other child
+
+add $t9, $t1, -1
+sll $t9, $t9, 2
+add $t9, $t0, $t9
+
+lw $t9, 0($t9)			# load parent other child
 beq $t9, 0, skipOnlyParent	# if parent other child is 0 skip
 add $t6, $t2, $t9		# new + parent other child
 bne $t6, $t8 invalidParent	# children do not add to parent
