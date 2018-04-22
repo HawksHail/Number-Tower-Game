@@ -12,12 +12,14 @@ partFilename: .asciiz "\\pyramid?.dat"				# individual file to be read. Is rando
 .align 2							# align on word boundary
 array: .space 112	# space for 28 words
 file: .space 512	# input buffer
-
+.globl load
 
 .text
+load:
 addiu $sp, $sp, -4	# store 1 word on stack
 sw $ra, 4($sp)      	# save $ra in the upper one
 
+# li $a0, 2		# set seed for testing
 li $v0, 42		# random int with bounds
 li $a1, 10		# maximum bound (not inclusive) i.e. [0,int)
 syscall
@@ -63,7 +65,7 @@ sw $v0, 0($t8)
 addi $t7, $t7, 1	# increment loop counter
 bne $t7, 28, loop	# loop until all 28 numbers are read
 
-lw $ra, ($sp) 		# load return address
+lw $ra, 4($sp) 		# load return address
 addiu $sp, $sp, 4	# restore $sp
 la $v0, array		# load array address into $v0		#COMMENT THESE 2 LINES TO TEST
 jr $ra			# return to caller
