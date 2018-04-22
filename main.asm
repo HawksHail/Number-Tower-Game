@@ -15,9 +15,8 @@ la $a0, array
 jal load
 
 move $s0, $v0	#save pyramid address
-
-move $a0, $s0	#move pyramid address to a0 for print
 start:
+move $a0, $s0	#move pyramid address to a0 for print
 jal printPyr	# print pyr
 
 jal getInput	# get user input
@@ -26,6 +25,7 @@ move $a0, $s0	#save user input
 move $a1, $v0
 move $a2, $v1
 jal verifyInput	# check input
+move $a0, $s0	#save user input
 
 beq $v0, 1, alreadyfilled	# if input is invalid print error
 beq $v0, 2, invalid		# if input is invalid print error
@@ -34,6 +34,7 @@ cont:
 sll $t5, $a1, 2			# update pyramid to include 
 add $t5, $t5, $s0
 sw $a2, 0($t5)
+jal midiRight
 j checkDone
 
 
@@ -42,6 +43,7 @@ invalid:
 li $v0, 4		# print string, invalid
 la $a0, invalidStr
 syscall
+jal midiWrong
 j start
 
 
@@ -49,6 +51,7 @@ alreadyfilled:
 li $v0, 4		# print string, filled
 la $a0, filledStr
 syscall
+jal midiWrong
 j start
 
 
