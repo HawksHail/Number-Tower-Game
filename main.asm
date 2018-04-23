@@ -2,7 +2,6 @@
 # 4/21/18
 
 .data
-array: .space 112 	# pyramid array
 invalidStr: .asciiz "\nThe input was invalid. "
 filledStr: .asciiz "\nThe spot is already filled. "
 notConfirmed: .asciiz "\nThe input was not entered. "
@@ -11,7 +10,6 @@ notConfirmed: .asciiz "\nThe input was not entered. "
 
 
 main:
-la $a0, array
 jal load
 
 move $s0, $v0	#save pyramid address
@@ -30,7 +28,6 @@ move $a0, $s0	#save user input
 beq $v0, 1, alreadyfilled	# if input is invalid print error
 beq $v0, 2, invalid		# if input is invalid print error
 
-cont:
 sll $t5, $a1, 2			# update pyramid to include 
 add $t5, $t5, $s0
 sw $a2, 0($t5)
