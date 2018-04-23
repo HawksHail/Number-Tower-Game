@@ -138,6 +138,7 @@ lw $t9, 108($s0)
 beq $t9, 0, start
 
 # Done
+move $a0, $s0	#move pyramid address to a0 for print
 jal printPyr	# print pyr
 jal midiWin
 
