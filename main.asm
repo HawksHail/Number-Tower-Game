@@ -2,28 +2,33 @@
 # 4/21/18
 
 .data
+frameBuffer: .space 0x20000
 invalidStr: .asciiz "\nThe input was invalid. "
 filledStr: .asciiz "\nThe spot is already filled. "
 notConfirmed: .asciiz "\nThe input was not entered. "
+
+.globl frameBuffer
 .globl main
+
 .text
-
-
 main:
+jal drawPyr	# draw pyramid on bitmap
 jal load
 
-move $s0, $v0	#save pyramid address
+move $s0, $v0	# save pyramid address
 start:
-move $a0, $s0	#move pyramid address to a0 for print
-jal printPyr	# print pyr
+move $a0, $s0	# move pyramid address to a0 for print
+jal printPyr	# print pyramid
+
+jal drawNums	# draw pyramid
 
 jal getInput	# get user input
 
-move $a0, $s0	#save user input
+move $a0, $s0	# save user input
 move $a1, $v0
 move $a2, $v1
 jal verifyInput	# check input
-move $a0, $s0	#save user input
+move $a0, $s0	# save user input
 
 beq $v0, 1, alreadyfilled	# if input is invalid print error
 beq $v0, 2, invalid		# if input is invalid print error
