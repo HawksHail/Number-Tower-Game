@@ -20,7 +20,7 @@ start:
 move $a0, $s0	# move pyramid address to a0 for print
 jal printPyr	# print pyramid
 
-jal drawNums	# draw pyramid
+jal drawNums	# draw numbers
 
 jal getInput	# get user input
 
@@ -145,6 +145,7 @@ beq $t9, 0, start
 # Done
 move $a0, $s0	#move pyramid address to a0 for print
 jal printPyr	# print pyr
+jal drawNums	# draw numbers
 jal midiWin
 
 li $v0, 10 		# exit
